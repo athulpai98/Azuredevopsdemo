@@ -23,12 +23,12 @@ jobs:
         -e RUN_LOCAL=true
         -e VALIDATE_ALL_CODEBASE=false
         -v $(System.DefaultWorkingDirectory):/tmp/lint
+#TODO implement sonarqube analysis
 
 - job: ToDo Check
   displayName: 'Run ToDo Checker'
   pool:
-    vmImage: 'ubuntu-latest'  # Válassz egy Linux alapú VM-et, ahol Python elérhető
-
+    vmImage: 'ubuntu-latest'
   steps:
   - checkout: self
 
