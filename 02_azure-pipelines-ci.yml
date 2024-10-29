@@ -69,20 +69,20 @@ jobs:
       projects: '**/WebApp.csproj'
   
   - task: DotNetCoreCLI@2
-    displayName: Build
+    displayName: Build csproj file
     inputs:
       projects: '**/WebApp.csproj'
       arguments: '--configuration $(BuildConfiguration)'
   
   - task: DotNetCoreCLI@2
-    displayName: Test
+    displayName: Run Unit Tests
     inputs:
       command: test
       projects: '**/*UnitTest*.csproj'
       arguments: '--configuration $(BuildConfiguration)'
   
   - task: DotNetCoreCLI@2
-    displayName: Publish
+    displayName: Publish test results
     inputs:
       command: publish
       publishWebProjects: True
@@ -90,7 +90,7 @@ jobs:
       zipAfterPublish: True
 
   - task: PublishBuildArtifacts@1
-    displayName: 'Publish Artifact (WebApp.zip)'
+    displayName: 'Upload WebApp CI build results'
     inputs:
       PathtoPublish: '$(build.artifactstagingdirectory)'
 
@@ -135,14 +135,3 @@ jobs:
     displayName: 'Publish Artifact: UI-Test'
     inputs:
       ArtifactName: 'UI-Test'
-
-- job: Infrastructure
-  displayName: 'Copy Infrastructure files (ARM)'
-  pool:
-    vmImage: 'ubuntu-latest'
-  steps:
-  - task: PublishBuildArtifacts@1
-    displayName: 'Publish Artifact: ARM templates'
-    inputs:
-      PathtoPublish: AzureResourceGroupDeployment
-      ArtifactName: arm
