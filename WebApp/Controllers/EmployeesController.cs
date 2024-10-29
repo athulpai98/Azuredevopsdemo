@@ -77,6 +77,7 @@ namespace WebApp.Controllers
             if (employee == null)
             {
                 return NotFound();
+                //Todo implement better error handling
             }
             return View(employee);
         }
